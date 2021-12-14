@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Joel Movie Database
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project untilizes the OMDB
 
 ## Available Scripts
 

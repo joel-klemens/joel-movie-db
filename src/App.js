@@ -11,7 +11,6 @@ import logo from "./images/jmdb.png";
 const API_KEY = '774611f9';
 
 const MainPage = styled.main`
-	padding: 1em; 
 	min-height: 100vh;
     background-color: #20232a;
     .main-section {
@@ -22,6 +21,8 @@ const MainPage = styled.main`
 			align-items: center;
 			justify-content: center;
 			margin-bottom: 20px;
+			padding: 1em;
+			background-color: #343844;
 
 			.logo {
 				img {
@@ -63,7 +64,7 @@ function App() {
 	const [noneFound, setNoneFound] = useState(false); 
 
 	//when a user makes a search, append the search and api key to the get
-	function handleClick(e) {
+	function handleSearch(e) {
 		axios.get(`https://www.omdbapi.com/?s=${search}&apikey=${API_KEY}`)
 			.then((response) => {
 				if(response.data.Response === 'False'){
@@ -81,6 +82,8 @@ function App() {
 				//if there is an error with the get log the error message 
 				console.log(error);
 			});
+		//stop the form submit from reloading the page 
+		e.preventDefault(); 
 	}
 
     return (
@@ -90,25 +93,33 @@ function App() {
 					<div className="logo">
 						<img src={logo} alt="jmdb logo"/>
 					</div>
-					<input 
-						type="search" 
-						className="search-field"
-						placeholder="Search OMDb..."
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-					/>
-					<div className="search-icon" onClick={handleClick} >
+					<form onSubmit={handleSearch}>
+						<input 
+							type="search" 
+							className="search-field"
+							placeholder="Search JMDb..."
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+						/>
+					</form>
+						
+					<div className="search-icon" onClick={handleSearch} >
 						<SearchIcon />
 					</div>
 				</div>
 				<div className="movies-row">
+					{/* if no results are found then add message to the page, else, add each movie as a movie card element */}
 					{ noneFound && (<h1>No results could be found...</h1>)}
 					{movies !== null && movies.map((movie, index) => {
 						return(
+							// Movie card will display the poster, title, year and a button.
+							//by default the button will say 'detail' but for fun lets have it indicate 
+							//the type 
 							<MovieCard key={index}
 								poster = {movie.Poster}
 								title = {movie.Title}
 								year = {movie.Year} 
+								buttonTxt={movie.Type}
 							/>
 						)
 					})}
