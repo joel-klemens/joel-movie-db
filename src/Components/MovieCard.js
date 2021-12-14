@@ -32,19 +32,6 @@ const MovieStyled = styled.div`
         color: #39739d;
         cursor: pointer;
     }
-    .button-8:hover,
-    .button-8:focus {
-    background-color: #b3d3ea;
-    color: #2c5777;
-    }
-    .button-8:focus {
-    box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
-    }
-    .button-8:active {
-    background-color: #a0c7e4;
-    box-shadow: none;
-    color: #2c5777;
-    }
 `;
 
 const MovieCard = ({poster, title, year, buttonTxt}) => {
