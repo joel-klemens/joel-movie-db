@@ -34,17 +34,17 @@ const MovieStyled = styled.div`
     }
 `;
 
-const MovieCard = ({poster, title, year, buttonTxt}) => {
+const MovieCard = ({poster, title, year, buttonTxt, handleFav}) => {
     return (
         <MovieStyled> 
             <div className='card-poster'>
-                {poster === 'N/A' ? (<p className='no-poster'>No poster available</p>) : (<img src={poster} alt=''/>)}
+                {poster === 'N/A' ? (<p className='no-poster'>No poster available</p>) : (<img src={poster} alt={title}/>)}
             </div>
             <div className="card-info">
                 <h2>{title}</h2>
                 <p>{year}</p>
             </div>
-            {buttonTxt ? (<button>{buttonTxt}</button>) : (<button>Details</button>) }
+            {buttonTxt ? (<button onClick={handleFav}>{buttonTxt}</button>) : (<button>Details</button>) }
         </MovieStyled>
     )
 }
